@@ -1,0 +1,14 @@
+<form #myForm="ngForm" title="Новий анекдот" (submit)="formSubmit()">
+  <div class="form-group">
+    <label for="joke-group">Категорія:</label>
+    <select [(ngModel)]="group.name" class="form-control" id="joke-group" name="joke-group">
+      <option *ngFor="let group of groups">{{group.name}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+  <label for="joke-text">Текст чорнухи:</label>
+  <textarea [(ngModel)]="content" class="form-control" id="joke-text" rows="5" cols="80"
+            placeholder="маленька дівчинка ..." name="joke-text" required></textarea>
+  </div>
+  <button type="submit" [disabled]="myForm.invalid" class="btn btn-primary">Відправити</button>
+</form>

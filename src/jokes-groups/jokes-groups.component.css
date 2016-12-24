@@ -1,0 +1,14 @@
+table {
+  width: 80%;
+  margin: 0 auto;
+}
+th {
+  text-align: center;
+}
+td {
+  padding: 3px 0px;
+  border-bottom: 1px solid black;
+}
+.add-group {
+  text-align: center;
+}

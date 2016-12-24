@@ -1,0 +1,16 @@
+<table>
+  <th>Список категорій</th>
+  <tr *ngFor="let group of groups">
+    <td>{{group.name}}</td>
+    <td>
+      <button type="button" class="close" (click)="deleteCategory(group)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </td>
+    <td></td>
+  </tr>
+</table>
+<div class="add-group">
+  <a href="#" [routerLink] = "['/add-group']">Додати групу</a>
+</div>
+

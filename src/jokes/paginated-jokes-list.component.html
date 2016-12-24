@@ -1,0 +1,25 @@
+<div class="jokes-cl">
+  <h3>Чорнушні анекдоти {{filter?'на тему ' + filter:''}}</h3>
+  <div class="joke-content" *ngFor="let joke of jokes" #elem>
+
+    <div class="joke-buttons">
+      <button type="button" class="close" aria-label="Close" (click)="deleteJoke(joke.id)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <pre>{{joke.content}}</pre>
+    <div>
+      <ngb-rating [(rate)]="currentRate"></ngb-rating>
+      <div class="joke-date-author">
+        <div>
+          <span>{{joke.author.name}}</span>
+        </div>
+        <div>
+          <span>{{joke.date | date:"HH:mm dd.MM.yy"}}</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div *ngIf="jokes == 0">Категорія поки-що пуста :(</div>
+</div>

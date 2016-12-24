@@ -1,0 +1,3 @@
+<router-outlet></router-outlet>
+<ngb-pagination [pageSize]="paginationService.pageSize" [(page)]="paginationService.page" (pageChange)="pageChange($event)"
+                [collectionSize]="paginationService.collectionSize"></ngb-pagination>
