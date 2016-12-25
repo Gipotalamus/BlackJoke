@@ -17,6 +17,8 @@ import {PaginatedJokesListComponent} from "../jokes/paginated-jokes-list.compone
 import {PaginationService} from "../services/pagination.service";
 import {LoginComponent} from "../authentication/login.component";
 import {JokesGroupsComponent} from "../jokes-groups/jokes-groups.component";
+import {UserGuard} from "../user/user.guard";
+import {UserService} from "../services/user.service";
 
 @NgModule({
   declarations: [
@@ -42,13 +44,13 @@ import {JokesGroupsComponent} from "../jokes-groups/jokes-groups.component";
                             children: [
                               {path: '', component: FilteredJokesListComponent,
                                 children: [{path: '', component: PaginatedJokesListComponent}]}]},
-                          {path: 'about', component: AboutComponent},
+                          {path: 'about', component: AboutComponent, canActivate: [UserGuard]},
                           {path: 'add-joke', component: AddJoke},
                           {path: 'add-group', component: AddJokesGroup},
                           {path: 'jokes-groups', component: JokesGroupsComponent},
                           {path: 'login', component: LoginComponent}])
   ],
-  providers: [JokeService, PaginationService, JokesGroupsService],
+  providers: [JokeService, PaginationService, JokesGroupsService, UserService, UserGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
