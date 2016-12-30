@@ -1,0 +1,6 @@
+h3 {
+  text-align: center;
+}
+.ng-invalid.ng-touched:not(form) {
+  border: 2px solid red;
+}
