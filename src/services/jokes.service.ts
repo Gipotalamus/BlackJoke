@@ -8,7 +8,10 @@ import {PaginationService} from "./pagination.service";
 @Injectable()
 export class JokeService{
 
-  constructor(private http: Http, private paginationService: PaginationService){}
+  constructor(private http: Http, private paginationService: PaginationService){
+
+
+  }
 
   getJokes(group: string, page: number, pageSize: number, sort: string): Observable<any>{
     return this.http.get('http://localhost:8080/jokes?filter=' + group + '&page=' + (page - 1) + '&size=' + pageSize + '&sort=' + sort)

@@ -16,7 +16,8 @@
   </ul>
   <ul class="nav navbar-nav navbar-right">
     <li class="nav-item">
-      <a class="nav-link" href="#" [routerLink]="['/login']">Логін</a>
+      <a class="nav-link" *ngIf="!(userService.user.loggedIn)" href="#" [routerLink]="['/login']">Логін</a>
+      <a class="nav-link" *ngIf="userService.user.loggedIn" href="javascript:void(0)" (click)="logout()">Вийти</a>
     </li>
   </ul>
 </nav>

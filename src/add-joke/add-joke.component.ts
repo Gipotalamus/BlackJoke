@@ -21,7 +21,7 @@ export class AddJoke implements OnInit {
 
   formSubmit() {
     let date: Date = new Date();
-    let joke: Joke = new Joke(null, this.content, this.group, date, new User(null, 'admin'), null);
+    let joke: Joke = new Joke(null, this.content, this.group, date, new User(null, 'admin', null, null), null);
     this.jokeService.saveJoke(joke).subscribe(data => console.log(data));
     this.router.navigate(['/'], {
       queryParams: {

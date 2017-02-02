@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, style} from "@angular/core";
+import {Component, OnInit, OnDestroy, style, Inject} from "@angular/core";
 import {Joke} from "./joke";
 import {JokeService} from "../services/jokes.service";
 import {ActivatedRoute, Router} from "@angular/router";

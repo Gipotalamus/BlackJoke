@@ -19,6 +19,9 @@ import {LoginComponent} from "../authentication/login.component";
 import {JokesGroupsComponent} from "../jokes-groups/jokes-groups.component";
 import {UserGuard} from "../user/user.guard";
 import {UserService} from "../services/user.service";
+import {FakeJokeService} from "../services/fake-jokes.service";
+import {FakeUserService} from "../services/fake-user.service";
+import {FakeJokesGroupsService} from "../services/fake-jokes-groups.service";
 
 @NgModule({
   declarations: [
@@ -50,7 +53,7 @@ import {UserService} from "../services/user.service";
                           {path: 'jokes-groups', component: JokesGroupsComponent},
                           {path: 'login', component: LoginComponent}])
   ],
-  providers: [JokeService, PaginationService, JokesGroupsService, UserService, UserGuard],
+  providers: [{provide: JokeService, useClass: FakeJokeService}, PaginationService, {provide: JokesGroupsService, useClass: FakeJokesGroupsService}, {provide: UserService, useClass: FakeUserService}, UserGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
