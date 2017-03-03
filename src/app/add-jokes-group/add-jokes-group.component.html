@@ -1,0 +1,7 @@
+<form (submit)="formSubmit()" [formGroup]="groupsForm">
+  <div class="form-group">
+    <label for="name">Назва категорії</label>
+    <input type="text" class="form-control" [(ngModel)]="name" id="name" name="group-name" formControlName="groupName">
+  </div>
+  <button type="submit" class="btn btn-outline-primary" [disabled]="!groupsForm.valid">Зберегти</button>
+</form>

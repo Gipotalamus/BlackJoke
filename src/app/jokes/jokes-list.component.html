@@ -1,0 +1,62 @@
+<h3>Чорнушні анекдоти {{filter?'на тему ' + filter:''}}</h3>
+<div class="dropdowns">
+  <div ngbDropdown class="d-inline-block">
+    <button class="btn btn-sm btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>Категорії</button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <button class="dropdown-item" [routerLink]="['/jokes']" [queryParams]="{filter: group.name, page: 1}"
+              (click)="selectCategory(group.name)" *ngFor="let group of jokesGroups">{{group.name}}
+      </button>
+      <button class="dropdown-item" [routerLink]="['/jokes']" [queryParams]="{filter: 'all', page: 1}"
+              (click)="selectCategory('all')">
+        всі категорії
+      </button>
+    </div>
+  </div>
+  <div ngbDropdown class="d-inline-block">
+    <button class="btn btn-sm btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>Сортувати за</button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <button class="dropdown-item" [routerLink]="['/jokes']" [queryParams]="{sort: sort.name, page: 1}"
+              (click)="selectSort(sort.name)" *ngFor="let sort of sorts">{{sort.title}}
+      </button>
+    </div>
+  </div>
+</div>
+<div class="jokes-cl">
+
+  <div class="joke-content mt-1" *ngFor="let joke of jokes; let last = last" #elem>
+
+    <div class="joke-buttons">
+      <button type="button" class="close" aria-label="Close" (click)="deleteJoke(joke)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <pre>{{joke.content}}</pre>
+    <div>
+      <div class="raiting">
+        <ngb-rating [rate]="joke.raiting" (rateChange)="vote($event, joke)">
+          <template let-fill="fill">
+            <span class="star" [class.filled]="fill === 100">&#9733;</span>
+          </template>
+        </ngb-rating>
+      </div>
+      <div class="joke-date-author">
+        <div>
+          <span>{{joke.author.name}}</span>
+          <span>{{joke.votes.length}}</span>
+        </div>
+        <div>
+          <span>{{joke.date | date:"HH:mm dd.MM.yy"}}</span>
+        </div>
+      </div>
+    </div>
+    <hr class="line" *ngIf="!last">
+  </div>
+
+  <div *ngIf="jokes == 0">Категорія поки-що пуста :(</div>
+</div>
+<ngb-pagination class="pagination justify-content-center mt-1" [collectionSize]="jokeService.collectionSize" [pageSize]="jokeService.pageSize"
+                [page]="jokeService.page + 1" (pageChange)="pageChanged($event)" size="sm"></ngb-pagination>
+
+
+
+

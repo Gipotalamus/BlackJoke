@@ -1,0 +1,12 @@
+<h3>Форма для логіну</h3>
+<form (submit)="formSubmit()" [formGroup]="loginForm">
+  <div class="form-group">
+    <label for="login">Логін:</label>
+    <input type="text" id="login" class="form-control" formControlName="login" name="login">
+  </div>
+  <div class="form-group">
+    <label for="pass">Пароль:</label>
+    <input type="password" id="pass" class="form-control" formControlName="password" name="pass">
+  </div>
+  <button type="submit" class="btn btn-outline-primary">Логін</button>
+</form>
