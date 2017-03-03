@@ -19,6 +19,7 @@ import {LoginComponent} from "../authentication/login.component";
 import {JokesGroupsComponent} from "../jokes-groups/jokes-groups.component";
 import {UserGuard} from "../user/user.guard";
 import {UserService} from "../services/user.service";
+import {RegisterComponent} from "../register/register.component";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {UserService} from "../services/user.service";
     FilteredJokesListComponent,
     PaginatedJokesListComponent,
     LoginComponent,
+    RegisterComponent,
     JokesGroupsComponent
   ],
   imports: [
@@ -48,7 +50,8 @@ import {UserService} from "../services/user.service";
                           {path: 'add-joke', component: AddJoke},
                           {path: 'add-group', component: AddJokesGroup},
                           {path: 'jokes-groups', component: JokesGroupsComponent},
-                          {path: 'login', component: LoginComponent}])
+                          {path: 'login', component: LoginComponent},
+                          {path: 'register', component: RegisterComponent}])
   ],
   providers: [JokeService, PaginationService, JokesGroupsService, UserService, UserGuard],
   bootstrap: [AppComponent]
