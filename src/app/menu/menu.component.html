@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark bg-inverse">
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
   <a class="navbar-brand" href="#">Головна</a>
   <ul class="nav navbar-nav">
     <li class="nav-item">
@@ -14,7 +14,10 @@
       <a class="nav-link" href="#" [routerLink]="['/jokes']">Анекдоти</a>
     </li>
   </ul>
-  <ul class="nav navbar-nav navbar-right">
+  <ul class="nav navbar-nav ml-lg-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="#" [routerLink]="['/register']">Реєстрація</a>
+    </li>
     <li class="nav-item">
       <a class="nav-link" *ngIf="!(userService.user.loggedIn)" href="#" [routerLink]="['/login']">Логін</a>
       <a class="nav-link" *ngIf="userService.user.loggedIn" href="javascript:void(0)" (click)="logout()">Вийти</a>

@@ -1,9 +1,9 @@
 import {Component, OnInit} from "@angular/core";
-import {JokesGroupsService} from "../services/jokes-groups.service";
-import {JokesGroup} from "../jokes-groups/jokes-groups";
 import {Router} from "@angular/router";
 import {FormControl, Validators, FormGroup, FormBuilder, AbstractControl} from "@angular/forms";
-import {Observable} from "rxjs";
+import {JokesGroup} from "../jokes-groups/jokes-groups";
+import {JokesGroupsService} from "../services/jokes-groups.service";
+
 
 
 @Component({
@@ -27,6 +27,7 @@ export class AddJokesGroup implements OnInit {
 
   asyncValidation(control: FormControl) {
     return this.jokesGroupsService.getJokesGroups().map(data => {
+      if (data.length == 0) return null;
       for (let group of data) {
         if (group.name === control.value) {
           console.log('invalid');

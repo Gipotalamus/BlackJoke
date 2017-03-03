@@ -5,7 +5,7 @@ import {Joke} from "../jokes/joke";
 import {JokesGroup} from "../jokes-groups/jokes-groups";
 import {User} from "../user/user";
 import {Router} from "@angular/router";
-import {PaginationService} from "../services/pagination.service";
+
 @Component({
   templateUrl: './add-joke.component.html',
   styleUrls: ['./add-joke.component.css']
@@ -16,20 +16,29 @@ export class AddJoke implements OnInit {
   content: string = '';
 
   constructor(private jokesGroupsService: JokesGroupsService, private jokeService: JokeService,
-              private router: Router, private paginationService: PaginationService) {
+              private router: Router) {
   }
 
   formSubmit() {
     let date: Date = new Date();
-    let joke: Joke = new Joke(null, this.content, this.group, date, new User(null, 'admin', null, null), null);
-    this.jokeService.saveJoke(joke).subscribe(data => console.log(data));
-    this.router.navigate(['/'], {
-      queryParams: {
-        'filter': this.paginationService.filter,
-        'page': this.paginationService.page,
-        'size': this.paginationService.pageSize
+    let joke: Joke = new Joke(null, this.content, this.group, date, new User(null, 'admin', null, null), null, 0);
+    this.jokeService.saveJoke(joke).subscribe(resp => {
+      if (resp.status === 200) {
+        this.jokeService.statusMessage = 'saved';
+        this.router.navigate(['jokes'], {
+          queryParams: {
+            'col': this.jokeService.collectionSize,
+            'filter': this.jokeService.filter,
+            'page': this.jokeService.page,
+            'size': this.jokeService.pageSize
+          }
+        })
       }
-    });
+
+    }
+   );
+    ++this.jokeService.collectionSize;
+
   }
 
   ngOnInit(): void {

@@ -1,7 +1,8 @@
 .container {
   padding-top: 20px;
   padding-bottom: 20px;
-  background-color: gainsboro;
+  background-color: black;
+  color: orange;
   height: 100%;
   width: 60%;
 }
