@@ -1,5 +1,5 @@
 <h3>Форма для логіну</h3>
-<form (submit)="formSubmit()" [formGroup]="loginForm">
+<form novalidate (ngSubmit)="formSubmit()" [formGroup]="loginForm">
   <div class="form-group">
     <label for="login">Логін:</label>
     <input type="text" id="login" class="form-control" formControlName="login" name="login">
@@ -8,5 +8,5 @@
     <label for="pass">Пароль:</label>
     <input type="password" id="pass" class="form-control" formControlName="password" name="pass">
   </div>
-  <button type="submit" class="btn btn-outline-primary">Логін</button>
+  <button type="submit" [disabled]="loginForm.invalid" class="btn btn-outline-primary">Логін</button>
 </form>

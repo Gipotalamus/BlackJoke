@@ -21,7 +21,7 @@ export class AddJoke implements OnInit {
 
   formSubmit() {
     let date: Date = new Date();
-    let joke: Joke = new Joke(null, this.content, this.group, date, new User(null, 'admin', null, null), null, 0);
+    let joke: Joke = new Joke(null, this.content, this.group, date, new User(null, 'admin', null, null, null), null, 0);
     this.jokeService.saveJoke(joke).subscribe(resp => {
       if (resp.status === 200) {
         this.jokeService.statusMessage = 'saved';
@@ -44,7 +44,7 @@ export class AddJoke implements OnInit {
   ngOnInit(): void {
     this.jokesGroupsService.getJokesGroups().subscribe(data => {
       this.groups = data;
-      this.group = this.groups[0];
+      this.group.name = this.groups[0].name;
     });
   }
 }
