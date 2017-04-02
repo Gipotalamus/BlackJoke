@@ -13,10 +13,6 @@ h3 {
 
 }
 
-.jokes-cl {
-
-}
-
 .joke-content {
   font-family: 'Courier New';
 }
@@ -26,32 +22,9 @@ h3 {
   border-top: 1px solid white;
 }
 
-.joke-date-author {
-  font-size: 14px;
-  text-align: right;
-}
-
 .dropdowns {
   text-align: right;
 }
 
-.raiting {
-  float: left;
-}
 
-.star {
-  font-size: 1rem;
-  color: #b0c4de;
-}
-.filled {
-  color: #1e90ff;
-}
-span:focus {
-  outline: none;
-  border: 0;
-}
-pre {
-  margin-bottom: 5px;
-  color: orange;
-}
 

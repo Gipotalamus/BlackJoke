@@ -12,13 +12,17 @@ import {JokesGroupsService} from "./services/jokes-groups.service";
 import {AddJokesGroup} from "./add-jokes-group/add-jokes-group.component";
 import {LoginComponent} from "./authentication/login.component";
 import {JokesGroupsComponent} from "./jokes-groups/jokes-groups.component";
-import {UserGuard} from "./user/user.guard";
+import {UserGuard} from "../guards/user.guard";
 import {JokeService} from "./services/jokes.service";
 import {UserService} from "./services/user.service";
 import {VoteService} from "./services/vote.service";
 import {PaginationComponent} from './pagination/pagination.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { RegisterComponent } from './register/register.component';
+import {AdminGuard} from "../guards/admin.guard";
+import { JokeComponent } from './joke/joke.component';
+import {routes} from "./app.routes";
+import {path, basePath} from "./services/path.config";
 
 
 @NgModule({
@@ -32,7 +36,8 @@ import { RegisterComponent } from './register/register.component';
     LoginComponent,
     JokesGroupsComponent,
     PaginationComponent,
-    RegisterComponent
+    RegisterComponent,
+    JokeComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -40,18 +45,9 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([
-      {path: '', redirectTo: 'jokes', pathMatch: 'full'},
-      {path: 'jokes', component: JokesListComponent},
-      {path: 'about', component: AboutComponent, canActivate: [UserGuard]},
-      {path: 'add-joke', component: AddJoke},
-      {path: 'add-group', component: AddJokesGroup},
-      {path: 'jokes-groups', component: JokesGroupsComponent},
-      {path: 'login', component: LoginComponent},
-      {path: 'register', component: RegisterComponent},
-      {path: '**', redirectTo: 'jokes'}])
+    RouterModule.forRoot(routes)
   ],
-  providers: [JokeService, JokesGroupsService, UserService, VoteService, UserGuard],
+  providers: [JokeService, JokesGroupsService, UserService, VoteService, UserGuard, AdminGuard, {provide: basePath, useValue: path}],
   bootstrap: [AppComponent]
 })
 export class AppModule {

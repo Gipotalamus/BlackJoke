@@ -1,0 +1,35 @@
+.joke-date-author {
+  font-size: 14px;
+  text-align: right;
+}
+
+.photo {
+  width: 35px;
+  max-height: 100px;
+}
+
+.raiting {
+  float: left;
+}
+
+ngb-rating:focus{
+outline: none;
+}
+
+
+.star {
+  font-size: 1rem;
+  color: #b0c4de;
+}
+.filled {
+  color: #1e90ff;
+}
+
+span:focus {
+  outline: none;
+  border: 0;
+}
+pre {
+  margin-bottom: 5px;
+  color: orange;
+}

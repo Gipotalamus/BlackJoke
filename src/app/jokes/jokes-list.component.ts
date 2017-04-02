@@ -7,16 +7,23 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Joke} from "./joke";
 import {VoteService} from "../services/vote.service";
 import {Vote} from "../votes/vote";
+import {UserService} from "../services/user.service";
+import {User} from "../user/user";
+import {deleteJoke} from "./joke.animation";
 
 
 @Component({
   templateUrl: './jokes-list.component.html',
-  styleUrls: ['./jokes-list.component.css']
+  styleUrls: ['./jokes-list.component.css'],
+  animations: [deleteJoke]
 })
-export class JokesListComponent implements OnInit {
+export class JokesListComponent {
 
   jokesGroups: JokesGroup[];
   jokes: Joke[];
+  votes: Vote[];
+  user: User;
+  state: string;
   sorts: Sort[] =
     [new Sort('категорією', 'jokeGroup'),
       new Sort('датою', 'date'),
@@ -24,11 +31,8 @@ export class JokesListComponent implements OnInit {
       new Sort('рейтингом', 'votes')];
 
   constructor(private jokesGroupsService: JokesGroupsService, private jokeService: JokeService,
-              private voteService: VoteService, private activatedRoute: ActivatedRoute, private router: Router) {
-  }
-
-  ngOnInit(): void {
-    console.log('hi from init');
+              private voteService: VoteService, private activatedRoute: ActivatedRoute, private router: Router,
+              private userService: UserService) {
     this.activatedRoute.queryParams.subscribe(params => {
       if (params['filter']) this.jokeService.filter = params['filter'];
       if (params['filter'] === 'all') this.jokeService.filter = '';
@@ -41,6 +45,8 @@ export class JokesListComponent implements OnInit {
     });
 
     this.getJokes();
+    this.user = userService.user;
+    this.getVotes(this.user);
   }
 
   getJokes(): void {
@@ -54,6 +60,7 @@ export class JokesListComponent implements OnInit {
   }
 
   deleteJoke(joke: Joke) {
+    joke.state = 'active';
     this.jokeService.collectionSize--;
     if (this.jokeService.collectionSize % this.jokeService.pageSize === 0 &&
       this.jokeService.page === Math.ceil(this.jokeService.collectionSize / this.jokeService.pageSize)) {
@@ -68,15 +75,27 @@ export class JokesListComponent implements OnInit {
     )
   }
 
+  getVotes(user: User): void {
+    this.voteService.getVotes(user).subscribe(data => {
+      this.votes = data;
+    });
+  }
+
+  vote(vote): void {
+    this.voteService.addVote(vote)
+      .subscribe(data => {
+          // this.getJokes();
+      });
+  }
+
   pageChanged(page: number) {
-    console.log(page);
     this.jokeService.page = page - 1;
     this.getJokes();
     this.router.navigate(['jokes'], {queryParams: {page: page}});
   }
 
   selectCategory(name: string) {
-    this.jokeService.filter = (name === 'all') ? '' : name ;
+    this.jokeService.filter = (name === 'all') ? '' : name;
     this.getJokes();
   }
 
@@ -85,14 +104,5 @@ export class JokesListComponent implements OnInit {
     this.getJokes();
   }
 
-  vote(val: number, joke: Joke): void {
-    // this.voteService.addVote(new Vote(joke, val))
-    //   .subscribe(data => {
-    //     console.log('voted!!!');
-    //     if (data.status == 200) {
-    //       this.getJokes();
-    //     }
-    //   });
-    console.log('vote!!');
-  }
+
 }

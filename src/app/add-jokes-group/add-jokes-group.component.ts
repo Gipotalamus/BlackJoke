@@ -40,9 +40,7 @@ export class AddJokesGroup implements OnInit {
 
   formSubmit() {
     this.jokesGroupsService.saveJokesGroup(new JokesGroup(null, this.name)).subscribe(data => {
-      if (data.status == 200) {
         this.router.navigate(['/jokes']);
-      }
     });
 
   }

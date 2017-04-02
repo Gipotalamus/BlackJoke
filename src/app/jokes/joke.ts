@@ -8,6 +8,7 @@ export class Joke{
   author: User;
   votes: number;
   raiting: number;
+  state: string;
   constructor(id: number, content: string, group: JokesGroup, date: Date, author: User, votes: number, raiting: number){
     this.id = id;
     this.content = content;

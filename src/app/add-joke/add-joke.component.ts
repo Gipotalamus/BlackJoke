@@ -5,6 +5,7 @@ import {Joke} from "../jokes/joke";
 import {JokesGroup} from "../jokes-groups/jokes-groups";
 import {User} from "../user/user";
 import {Router} from "@angular/router";
+import {UserService} from "../services/user.service";
 
 @Component({
   templateUrl: './add-joke.component.html',
@@ -16,12 +17,13 @@ export class AddJoke implements OnInit {
   content: string = '';
 
   constructor(private jokesGroupsService: JokesGroupsService, private jokeService: JokeService,
-              private router: Router) {
+              private router: Router, private userService: UserService) {
   }
 
   formSubmit() {
     let date: Date = new Date();
-    let joke: Joke = new Joke(null, this.content, this.group, date, new User(null, 'admin', null, null, null), null, 0);
+    console.log(this.userService.user);
+    let joke: Joke = new Joke(null, this.content, this.group, date, this.userService.user, null, 0);
     this.jokeService.saveJoke(joke).subscribe(resp => {
       if (resp.status === 200) {
         this.jokeService.statusMessage = 'saved';

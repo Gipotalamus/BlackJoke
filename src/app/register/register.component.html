@@ -8,5 +8,9 @@
     <label for="password">Пароль</label>
     <input type="password" id="password" class="form-control" [(ngModel)]="password" formControlName="password"/>
   </div>
+  <div class="form-group">
+    <label for="avatar">Фото</label>
+    <input type="file" id="avatar" class="form-control-file" (change)="onChange($event)" formControlName="photo"/>
+  </div>
   <button [disabled]="regForm.invalid" class="btn btn-outline-primary" type="submit">Зареєструватися</button>
 </form>

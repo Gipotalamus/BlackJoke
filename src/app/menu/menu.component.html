@@ -4,7 +4,7 @@
     <li class="nav-item">
       <a class="nav-link" href="#" [routerLink]="['/about']">Інформація <span class="sr-only">(current)</span></a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" *ngIf="userService.user.role==='[ROLE_ADMIN]'">
       <a class="nav-link" href="#" [routerLink]="['/jokes-groups']">Категорії</a>
     </li>
     <li class="nav-item">
@@ -16,7 +16,7 @@
   </ul>
   <ul class="nav navbar-nav ml-lg-auto">
     <li class="nav-item">
-      <a class="nav-link" href="#" [routerLink]="['/register']">Реєстрація</a>
+      <a class="nav-link" *ngIf="!(userService.user.loggedIn)" href="#" [routerLink]="['/register']">Реєстрація</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" *ngIf="!(userService.user.loggedIn)" href="#" [routerLink]="['/login']">Логін</a>

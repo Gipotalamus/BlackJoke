@@ -1,0 +1,31 @@
+<div class="joke-buttons">
+  <button *ngIf="user.role==='[ROLE_ADMIN]'" type="button" class="close" aria-label="Close" (click)="deleteCurrentJoke()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<pre>{{joke.content}}</pre>
+<div class="row">
+  <div class="raiting col">
+    <ngb-rating [rate]="joke.raiting" (rateChange)="voteCurrentJoke($event)" [readonly]="!canVote">
+      <template let-fill="fill">
+        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+      </template>
+    </ngb-rating>
+    <div *ngIf="currentVote">
+      Ваша оцінка: {{currentVote}}
+    </div>
+  </div>
+  <div class="joke-date-author col">
+    <div>
+      <span>{{joke.author.name}}</span>
+      <!--<span>{{joke.votes.length}}</span>-->
+    </div>
+    <div>
+      <span>{{joke.date | date:"HH:mm dd.MM.yy"}}</span>
+    </div>
+
+  </div>
+  <div class="col-1">
+    <img class="photo" [src]="joke.author.photo">
+  </div>
+</div>
