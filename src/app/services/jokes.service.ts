@@ -3,7 +3,7 @@ import {Joke} from "../jokes/joke";
 import 'rxjs/Rx';
 import {Injectable, Inject} from "@angular/core";
 import {Observable} from "rxjs/Rx";
-import {path, basePath} from "./path.config";
+import {basePath} from "./path.config";
 
 @Injectable()
 export class JokeService {
