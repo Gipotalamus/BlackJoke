@@ -17,7 +17,7 @@ export class JokeService {
   path: string;
 
   constructor(private http: Http, @Inject(basePath) private basePath: string) {
-    this.path = `${basePath}jokes`;
+    this.path = `${basePath}jokes/`;
   }
 
   getJokes(): Observable<any> {
