@@ -12,7 +12,7 @@ export class VoteService {
   path: string;
 
   constructor(private http: Http,  @Inject(basePath) private basePath: string) {
-    this.path = `${basePath}votes`;
+    this.path = `${basePath}votes/`;
     this.headers = new Headers({'Content-Type': 'application/json'});
     this.ro = new RequestOptions({headers: this.headers})
   }
