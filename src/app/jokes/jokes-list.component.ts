@@ -28,7 +28,7 @@ export class JokesListComponent {
     [new Sort('категорією', 'jokeGroup'),
       new Sort('датою', 'date'),
       new Sort('автором', 'author'),
-      new Sort('рейтингом', 'votes')];
+      new Sort('рейтингом', 'raiting')];
 
   constructor(private jokesGroupsService: JokesGroupsService, private jokeService: JokeService,
               private voteService: VoteService, private activatedRoute: ActivatedRoute, private router: Router,
@@ -43,19 +43,15 @@ export class JokesListComponent {
     this.jokesGroupsService.getJokesGroups().subscribe(data => {
       this.jokesGroups = data;
     });
-
     this.getJokes();
     this.user = userService.user;
     this.getVotes(this.user);
   }
 
   getJokes(): void {
-    this.jokeService.getJokes().subscribe(data => {
-      if (data.status === 200) {
-        let json = data.json();
-        this.jokeService.collectionSize = json['totalElements'];
-        this.jokes = json['content'];
-      }
+    this.jokeService.getJokes().subscribe(json => {
+      this.jokeService.collectionSize = json['totalElements'];
+      this.jokes = json['content'];
     });
   }
 
@@ -67,11 +63,9 @@ export class JokesListComponent {
       this.jokeService.page--;
     }
     this.jokeService.deleteJoke(joke.id).subscribe(data => {
-        if (data.status == 204) {
-          this.jokeService.statusMessage = 'deleted';
-          this.getJokes();
-        }
-      }
+        this.jokeService.statusMessage = 'deleted';
+        this.getJokes();
+      }, err => console.log(err)
     )
   }
 
@@ -84,7 +78,7 @@ export class JokesListComponent {
   vote(vote): void {
     this.voteService.addVote(vote)
       .subscribe(data => {
-          // this.getJokes();
+        // this.getJokes();
       });
   }
 

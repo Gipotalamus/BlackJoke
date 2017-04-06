@@ -25,7 +25,6 @@ export class AddJoke implements OnInit {
     console.log(this.userService.user);
     let joke: Joke = new Joke(null, this.content, this.group, date, this.userService.user, null, 0);
     this.jokeService.saveJoke(joke).subscribe(resp => {
-      if (resp.status === 200) {
         this.jokeService.statusMessage = 'saved';
         this.router.navigate(['jokes'], {
           queryParams: {
@@ -36,11 +35,8 @@ export class AddJoke implements OnInit {
           }
         })
       }
-
-    }
-   );
+    );
     ++this.jokeService.collectionSize;
-
   }
 
   ngOnInit(): void {

@@ -21,16 +21,15 @@ export class RegisterComponent implements OnInit {
     this.regForm = new FormGroup({
       'name': new FormControl('', Validators.compose([Validators.minLength(5), Validators.maxLength(25), Validators.required])),
       'password': new FormControl('', Validators.compose([Validators.minLength(5), Validators.maxLength(25), Validators.required])),
-      'photo': new FormControl('')});
+      'photo': new FormControl('')
+    });
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   register() {
     this.userService.addUser(new User(null, this.name, this.password, null, 'ROLE_USER', false), this.photo)
-      .subscribe(resp => {if (resp.status === 200) this.router.navigate(['jokes']);});
+      .subscribe(resp => this.router.navigate(['jokes']));
   }
 
   onChange(event) {

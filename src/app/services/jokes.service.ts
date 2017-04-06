@@ -26,17 +26,17 @@ export class JokeService {
     searchParams.append('page', (this.page).toString());
     searchParams.append('size', this.pageSize.toString());
     searchParams.append('sort' ,this.sort);
-    return this.http.get(this.path, {search: searchParams});
+    return this.http.get(this.path, {search: searchParams}).map(resp => resp.json()).catch((err: Response) => Observable.throw(err.status));
   }
 
   saveJoke(joke: Joke): Observable<any> {
     let headers: Headers = new Headers({'Content-Type': 'application/json'});
     let ro: RequestOptions = new RequestOptions({headers: headers});
-    return this.http.post(this.path, JSON.stringify(joke), ro);
+    return this.http.post(this.path, JSON.stringify(joke), ro).map(resp => resp.json()).catch((err: Response) => Observable.throw(err.status));
   }
 
   deleteJoke(jokeId: number): Observable<any> {
-    return this.http.delete(this.path + jokeId);
+    return this.http.delete(this.path + jokeId).map(resp => resp.json()).catch((err: Response) => Observable.throw(err.status));
   }
 
 }

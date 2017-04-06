@@ -8,7 +8,6 @@ import {basePath, path} from "./path.config";
 @Injectable()
 export class UserService {
 
-
   user: User;
   path: string;
 
@@ -31,7 +30,6 @@ export class UserService {
     })).subscribe(resp => {
       if (resp.status == 200) {
         let token = resp.headers.get('Authorization').substr(7);
-        console.log(resp.headers);
         this.user.name = resp.headers.get('User');
         this.user.role = resp.headers.get('Roles');
         this.user.loggedIn = true;
@@ -54,12 +52,11 @@ export class UserService {
   }
 
   addUser(user: User, photo: File): Observable<any> {
-    console.log(photo.name);
     let fd = new FormData();
     fd.append('user', new Blob([JSON.stringify(user)], {type: "application/json"}));
     fd.append('photo', photo);
     let headers: Headers = new Headers();
     let ro: RequestOptions = new RequestOptions({headers: headers});
-    return this.http.post(`${this.basePath}users`, fd, ro);
+    return this.http.post(`${this.basePath}users`, fd, ro).map(resp => resp.json()).catch((err: Response) => Observable.throw(err.status));
   }
 }
